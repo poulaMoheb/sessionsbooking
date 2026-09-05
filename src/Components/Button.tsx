@@ -21,6 +21,7 @@ function Button(props: ButtonProps) {
         return 'to' in props
     }
 
+    // Extra Type Validation 
     if (isLink(props))
         return (
             <Link className={`button button${props.textOnly && '--text-only'}`} {...props} >{props.children}</Link>
