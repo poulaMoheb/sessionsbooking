@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Button from '../Components/Button';
+import Button from '../Components/UI/Button';
 
 export default function Root() {
   return (

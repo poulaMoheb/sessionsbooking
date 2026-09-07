@@ -32,6 +32,14 @@ export const sessionSlice = createSlice({
                 state.items.push({ ...action.payload })
             }
         },
+        removeSession(
+            state,
+            action: PayloadAction<string>) {
+            const removedItemIndex = state.items.findIndex(item => item.id === action.payload)
+            if (removedItemIndex !== -1) {
+                state.items.splice(removedItemIndex, 1);
+            }
+        }
     }
 })
 

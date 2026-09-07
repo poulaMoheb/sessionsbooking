@@ -5,3 +5,8 @@ type DispatchFunction = () => AppDispatch
 
 export const useSessionDispatch: DispatchFunction = useDispatch;
 export const useSessionState: TypedUseSelectorHook<RootState> = useSelector;
+
+
+export const useControlDialog = (setState: (value: boolean) => void, convertTo: boolean) => {
+    setState(convertTo);
+}
