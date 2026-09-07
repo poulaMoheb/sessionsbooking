@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { SESSIONS } from '../dummy-sessions.ts';
 import Button from '../Components/Button.tsx';
 import { useState } from 'react';
-import Modal from '../Components/Modal.tsx';
-import Input from '../Components/Input.tsx';
+import BookSession from '../Sessions/BookSession.tsx';
 
 export default function SessionPage() {
   const params = useParams<{ id: string }>();
@@ -12,6 +11,16 @@ export default function SessionPage() {
 
   const sessionId = params.id;
   const loadedSession = SESSIONS.find((session) => session.id === sessionId);
+
+  function handleOpenDialog() {
+    setOpenDialog(true)
+
+  }
+
+  function handleCloseDialog() {
+    setOpenDialog(false)
+
+  }
 
   if (!loadedSession) {
     return (
@@ -25,12 +34,7 @@ export default function SessionPage() {
   return (
     <main id="session-page">
       {openDialog &&
-        <Modal onClose={() => setOpenDialog(false)}>
-          <h1>Reserve Session</h1>
-          <Input id='name' label='Your Name' />
-          <Input id='email' label='Your Email' />
-          <Button textOnly={false}>Submit</Button>
-        </Modal>}
+        <BookSession session={loadedSession} onDone={handleCloseDialog} />}
       <article>
         <header>
           <img
@@ -47,7 +51,7 @@ export default function SessionPage() {
               })}
             </time>
             <p>
-              <Button textOnly={false} onClick={() => setOpenDialog(true)}>
+              <Button textOnly={false} onClick={handleOpenDialog}>
                 Book Session
               </Button>
             </p>

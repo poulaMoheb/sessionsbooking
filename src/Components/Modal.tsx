@@ -1,28 +1,35 @@
-import { useEffect, useRef, type ReactNode } from "react";
-import Button from "./Button";
+import { forwardRef, useImperativeHandle, useRef, type ReactNode } from "react";
+import { createPortal } from "react-dom";
+
+export type ModalHandle = {
+    open: () => void;
+}
 
 type ModalProps = {
     onClose: () => void;
     children: ReactNode;
 };
 
-function Modal({ onClose, children }: ModalProps) {
-    const dialog = useRef<HTMLDialogElement>(null);
 
-    useEffect(() => {
-        dialog.current?.showModal();
+const Modal = forwardRef(
+    function Modal({ children }: ModalProps, ref) {
+        const dialog = useRef<HTMLDialogElement>(null);
 
-        return () => dialog.current?.close();
-    }, []);
+        useImperativeHandle(ref, () => {
+            return {
+                open: () => {
+                    if (dialog.current)
+                        dialog.current.showModal();
+                }
 
-    return (
-        <dialog ref={dialog}>
-            <div>
+            }
+        })
+        return createPortal(
+            <dialog ref={dialog} className="modal" >
                 {children}
-            </div>
-            <Button textOnly={true} onClick={onClose}>Close</Button>
-        </dialog>
-    )
-}
+            </dialog>,
+            document.getElementById("modal-root")!,
+        );
+    })
 
 export default Modal
