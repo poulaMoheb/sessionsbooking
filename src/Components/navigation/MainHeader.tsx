@@ -6,6 +6,7 @@ import UpcomingSessions from '../Sessions/UpcomingSessions';
 function MainHeader() {
     const [upcomingSessionsVisible, setUpcomingSessionsVisible] = useState(false);
 
+
     function handleOpenDialog() {
         setUpcomingSessionsVisible(true);
     }
@@ -16,7 +17,7 @@ function MainHeader() {
     return (
         <>
             {upcomingSessionsVisible && (
-                <UpcomingSessions onClose={handleCloseDialog} />
+                <UpcomingSessions onDone={handleCloseDialog} />
             )}
             <header id="main-header">
                 <h1>ReactMentoring</h1>
