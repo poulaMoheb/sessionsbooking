@@ -22,13 +22,15 @@ function Button(props: ButtonProps) {
     }
 
     // Extra Type Validation 
-    if (isLink(props))
+    if (isLink(props)) {
+        const { textOnly, ...linkProps } = props;
         return (
-            <Link className={`button button${props.textOnly && '--text-only'}`} {...props} >{props.children}</Link>
+            <Link className={`button button${textOnly && '--text-only'}`} {...linkProps} >{props.children}</Link>
         )
-
+    }
+    const { textOnly, ...buttonProps } = props;
     return (
-        <button className={`button button${props.textOnly && '--text-only'}`} {...props} >{props.children}</button>
+        <button className={`button button${textOnly && '--text-only'}`} {...buttonProps} >{props.children}</button>
     )
 }
 
