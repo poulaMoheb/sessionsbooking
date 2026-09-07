@@ -43,4 +43,4 @@ export const sessionSlice = createSlice({
     }
 })
 
-export const { addSession } = sessionSlice.actions;
+export const { addSession, removeSession } = sessionSlice.actions;

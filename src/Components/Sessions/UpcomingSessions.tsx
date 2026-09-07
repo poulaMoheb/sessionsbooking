@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import Modal, { ModalHandle } from "../UI/Modal";
-import { useSessionState } from "../../store/Hooks";
+import { useSessionDispatch, useSessionState } from "../../store/Hooks";
 import UpcomingSession from "./UpcomingSession";
 import Button from "../UI/Button";
+import { removeSession } from "../../store/SessionSlice";
 
 type UpcomingSessionsProps = {
     onDone: () => void;
@@ -10,22 +11,25 @@ type UpcomingSessionsProps = {
 
 
 function UpcomingSessions({ onDone, ...props }: UpcomingSessionsProps) {
+    const dispatch = useSessionDispatch();
 
 
     const modal = useRef<ModalHandle>();
 
 
     function handleCancelSession(id: string) {
-
+        dispatch(removeSession(id));
     }
     useEffect(() => {
         if (modal.current)
             modal.current.open();
     }, []);
+
+
     const sessionsRdx = useSessionState(state => state.sessions.items);
     const hasSessions = sessionsRdx.length;
     return (
-        <Modal onClose={onDone}>
+        <Modal onClose={onDone} ref={modal}>
             <h2>Upcoming Sessions</h2>
             {hasSessions && (
                 <ul>
