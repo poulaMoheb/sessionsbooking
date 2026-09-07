@@ -1,19 +1,11 @@
 import { FormEvent, useEffect, useRef } from "react"
 import Button from "../Components/Button"
 import Input from "../Components/Input"
-import Modal, { ModalHandle } from "../Components/Modal";
+import Modal, { type ModalHandle } from "../Components/Modal";
+import { addSession, type Session } from "../store/SessionSlice";
+import { useSessionDispatch } from "../store/Hooks";
 
 
-
-type Session = {
-    id: string;
-    title: string;
-    summary: string;
-    description: string;
-    date: string;
-    image: string;
-    duration: number;
-};
 
 type BookSessionProps = {
     onDone: () => void;
@@ -23,6 +15,7 @@ type BookSessionProps = {
 
 function BookSession({ onDone, session }: BookSessionProps) {
     const modal = useRef<ModalHandle>();
+    const dispatch = useSessionDispatch();
 
     // useEffect is used to open the Modal via its exposed `open` method when the component is mounted
     useEffect(() => {
@@ -33,7 +26,9 @@ function BookSession({ onDone, session }: BookSessionProps) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log(session)
+
+        dispatch(addSession(session));
+        onDone();
     }
 
     return (
