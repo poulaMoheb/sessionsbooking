@@ -2,14 +2,14 @@ import { FormEvent, useEffect, useRef } from "react"
 import Button from "../UI/Button"
 import Input from "../UI/Input"
 import Modal, { type ModalHandle } from "../UI/Modal";
-import { addSession, type Session } from "../../store/SessionSlice";
+import { addSession, SessionTypes } from "../../store/SessionSlice";
 import { useSessionDispatch } from "../../store/Hooks";
 
 
 
 type BookSessionProps = {
     onDone: () => void;
-    session: Session
+    session: SessionTypes
 }
 
 

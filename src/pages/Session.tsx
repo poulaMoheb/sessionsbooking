@@ -5,12 +5,16 @@ import Button from '../Components/UI/Button.tsx';
 import { useState } from 'react';
 import BookSession from '../Components/Sessions/BookSession.tsx';
 
+
+
 export default function SessionPage() {
   const params = useParams<{ id: string }>();
-  const [openDialog, setOpenDialog] = useState(false);
-
   const sessionId = params.id;
   const loadedSession = SESSIONS.find((session) => session.id === sessionId);
+
+
+  const [openDialog, setOpenDialog] = useState(false);
+
 
   function handleOpenDialog() {
     setOpenDialog(true)

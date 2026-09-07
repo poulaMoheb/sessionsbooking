@@ -1,8 +1,8 @@
-import { type Session } from "../../store/SessionSlice"
+import { type SessionTypes } from "../../store/SessionSlice"
 import Button from "../UI/Button"
 
 type UpcomingSessionProps = {
-    session: Session,
+    session: SessionTypes,
     onCancel: () => void,
 }
 

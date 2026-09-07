@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type Session = {
+export type SessionTypes = {
     id: string;
     title: string;
     summary: string;
@@ -11,7 +11,7 @@ export type Session = {
 };
 
 type SessionState = {
-    items: Session[];
+    items: SessionTypes[];
 }
 
 
@@ -24,7 +24,7 @@ export const sessionSlice = createSlice({
     reducers: {
         addSession(
             state,
-            action: PayloadAction<Session>) {
+            action: PayloadAction<SessionTypes>) {
             if (state.items.find(item => item.id === action.payload.id)) {
                 return
             }
